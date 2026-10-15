@@ -1,5 +1,7 @@
 # Лабораторная 1 по дисциплине "Технологии программирования"
 
+[![Testing the Python code](https://github.com/Klaw271/PTLab1/actions/workflows/github-actions-testing.yml/badge.svg)](https://github.com/Klaw271/PTLab1/actions/workflows/github-actions-testing.yml)
+
 Знакомство с системой контроля версий Git и инструментом CI/CD GitHub Actions.
 
 ## Постановка задачи
@@ -18,7 +20,7 @@
 ## Краткое описание проекта
 
 ```
-rating
+PTLab1 (в методических указаниях директория называется rating)
   |----.github/workflows/github-actions-testing.yml
   |----data
   |     |----data.txt          # исходный текстовый формат
@@ -148,8 +150,22 @@ classDiagram
 3. Индивидуальное задание выполнялось в отдельной ветке
    `feature/variant8-yaml-quartile`, после чего ветка была смержена в `main`.
 4. Проверка CI: пуш в `main` запускает workflow `Testing the Python code`
-   (установка зависимостей, `pycodestyle src test`, `pytest test`). Добавление
-   намеренной ошибки делает статус красным, исправление — снова зелёным.
+   (установка зависимостей, `pycodestyle src test`, `pytest test`).
+
+### Проверка реакции CI (п. 33 методических указаний)
+
+| Прогон | Коммит | Изменение | Результат workflow |
+|--------|--------|-----------|--------------------|
+| 1 | `2a237b4` | базовое состояние проекта | `success` |
+| 2 | `9cee6c5` | делитель среднего рейтинга заменён с `len(self.data[key])` на `len(self.data)` | `failure` на шаге `Test with pytest` (`test_calc`: получено 128.0 вместо 85.333), шаг `Lint with pycodestyle` — успешен |
+| 3 | `7d1ce5f` | `git revert` предыдущего коммита | `success` |
+
+Ошибка такого рода не видна при беглом взгляде на код, но задерживается
+модульным тестом: CI отделяет проверенное состояние ветки от сломанного.
+
+Прогоны №1–№4 были выполнены до смены автора коммитов (`git config user.name` /
+`user.email`), поэтому в их логах указаны прежние хэши `184b4e9`, `18dc1f5`,
+`2163e68` — содержимое деревьев при этом идентично новому истории.
 
 ## Теоретические вопросы
 
