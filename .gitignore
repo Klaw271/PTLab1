@@ -1,0 +1,42 @@
+# Виртуальные окружения и кэш Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Артефакты сборки и распространения
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Артефакты pytest и покрытия
+.pytest_cache/
+.cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# Отчёты и временные файлы
+*.log
+*.tmp
+tmp/
+out/
+
+# IDE и редакторы
+.idea/
+.vscode/
+*.swp
+*.bak
+
+# Системные файлы ОС
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Локальные настройки и секреты
+.env
+.env.*
+*.local
