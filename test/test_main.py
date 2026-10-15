@@ -2,6 +2,7 @@
 import pytest
 
 from src.main import get_path_from_arguments
+from src.main import get_reader
 
 
 @pytest.fixture()
@@ -25,3 +26,15 @@ def test_get_path_from_noncorrect_arguments(
     with pytest.raises(SystemExit) as e:
         get_path_from_arguments(noncorrect_arguments_string[0])
     assert e.type == SystemExit
+
+
+def test_get_reader_for_yaml_file() -> None:
+    assert type(get_reader("./data/data.yaml")).__name__ == "YamlDataReader"
+
+
+def test_get_reader_for_uppercase_yml_file() -> None:
+    assert type(get_reader("./data/DATA.YML")).__name__ == "YamlDataReader"
+
+
+def test_get_reader_for_text_file() -> None:
+    assert type(get_reader("./data/data.txt")).__name__ == "TextDataReader"
